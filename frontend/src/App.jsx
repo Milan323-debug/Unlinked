@@ -26,7 +26,12 @@ function App() {
       })
       .catch(err => {
         console.error("Error connecting to API:", err);
-        toast.error("Cannot connect to server. Please make sure backend is running.");
+        // Only show error toast for non-auth failures
+        if (!err.response || err.response.status !== 401) {
+          toast.error("Cannot connect to server. Please make sure backend is running.");
+        } else {
+          console.log("Authentication required - this is expected if not logged in");
+        }
       });
   }, []);
 
@@ -48,7 +53,7 @@ function App() {
     refetchOnWindowFocus: false,
     onError: (error) => {
       console.error("Auth query error:", error);
-      if (error?.response?.status !== 401) {
+      if (!error.response || error.response.status !== 401) {
         toast.error(error?.response?.data?.message || "Error connecting to server");
       }
     }
