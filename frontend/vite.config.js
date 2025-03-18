@@ -13,9 +13,12 @@ export default defineConfig({
     assetsDir: 'assets',
     rollupOptions: {
       external: ['node:*'],
+    },
+    optimizeDeps: {
+      include: ['axios']
     }
   },
-  optimizeDeps: {
-    include: ['axios']
-  }
+  server: {
+    port: 3000,
+  },
 });
