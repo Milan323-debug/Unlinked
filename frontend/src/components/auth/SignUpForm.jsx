@@ -84,7 +84,7 @@ const SignUpForm = ({ signUp }) => {
       <button 
         type="submit" 
         disabled={isLoading} 
-        className='btn btn-primary w-full h-12 rounded-md text-white flex items-center justify-center bg-primary hover:bg-primary-focus'
+        className='w-full h-12 rounded-md text-white flex items-center justify-center bg-primary hover:bg-primary-focus font-medium'
       >
         {isLoading ? <Loader className='size-5 animate-spin mr-2' /> : 'Agree & Join'}
       </button>

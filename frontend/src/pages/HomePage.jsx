@@ -6,9 +6,15 @@ import Post from "../components/Post";
 import { MessageCircle, Users } from "lucide-react";
 import RecommendedUser from "../components/RecommendedUser";
 import { useAuth } from '../hooks/useAuth';
+import { useState } from 'react';
 
 const HomePage = () => {
 	const { data: authUser } = useAuth();
+	const [showMore, setShowMore] = useState(false);
+
+	const handleShowMore = () => {
+		setShowMore(!showMore);
+	};
 
 	const { data: recommendedUsers } = useQuery({
 		queryKey: ["recommendedUsers"],
@@ -30,7 +36,6 @@ const HomePage = () => {
 		<div className='grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-7xl mx-auto py-6'>
 			<div className='hidden lg:block lg:col-span-1'>
 				<Sidebar user={authUser} />
-				
 				{/* News section (LinkedIn-style) */}
 				<div className="bg-white rounded-lg shadow-md mt-4 overflow-hidden transition-all duration-300 hover:shadow-lg">
 					<div className="p-4 border-b border-gray-200">
@@ -43,7 +48,7 @@ const HomePage = () => {
 									<a href="#" className="flex items-start space-x-3 group-hover:text-blue-600 transition-colors duration-200">
 										<span className="text-xs mt-1 font-bold">•</span>
 										<div>
-											<p className="font-medium text-sm text-gray-800 group-hover:text-blue-600">Top news story {item}: Professional networking trends in 2024</p>
+											<p className="font-medium text-sm text-gray-800 group-hover:text-blue-600">Top news story {item}: Professional networking trends in 2025</p>
 											<p className="text-xs text-gray-500 mt-1">3d ago • 1,234 readers</p>
 										</div>
 									</a>
@@ -56,11 +61,9 @@ const HomePage = () => {
 
 			<div className='col-span-1 lg:col-span-2 order-first lg:order-none space-y-4'>
 				<PostCreation user={authUser} />
-
 				{posts?.map((post) => (
 					<Post key={post._id} post={post} />
 				))}
-
 				{posts?.length === 0 && (
 					<div className='bg-white rounded-lg shadow-md p-8 text-center transition-all duration-300 hover:shadow-lg'>
 						<div className='mb-6 bg-blue-50 rounded-full p-4 w-20 h-20 flex items-center justify-center mx-auto'>
@@ -75,22 +78,24 @@ const HomePage = () => {
 				)}
 			</div>
 
-			{recommendedUsers?.length > 0 && (
+			{Array.isArray(recommendedUsers) && recommendedUsers.length > 0 && (
 				<div className='col-span-1 lg:col-span-1 hidden lg:block'>
 					<div className='bg-white rounded-lg shadow-md p-4 transition-all duration-300 hover:shadow-lg'>
 						<h2 className='font-semibold text-lg text-gray-800 mb-4 border-b border-gray-200 pb-2'>People you may know</h2>
 						<div className="space-y-4">
-							{recommendedUsers?.slice(0, 5).map((user) => (
+							{recommendedUsers.slice(0, showMore ? recommendedUsers.length : 5).map((user) => (
 								<RecommendedUser key={user._id} user={user} />
 							))}
 						</div>
-						{recommendedUsers?.length > 5 && (
-							<button className="text-blue-600 font-medium mt-4 hover:text-blue-800 transition-colors duration-200 text-sm w-full text-center">
-								Show more
+						{recommendedUsers.length > 5 && (
+							<button 
+								className="text-blue-600 font-medium mt-4 hover:text-blue-800 transition-colors duration-200 text-sm w-full text-center"
+								onClick={handleShowMore}
+							>
+								{showMore ? "Show less" : "Show more"}
 							</button>
 						)}
 					</div>
-					
 					{/* Footer - LinkedIn style */}
 					<div className="mt-4 p-4">
 						<div className="flex flex-wrap text-xs text-gray-500 gap-2">
@@ -100,7 +105,7 @@ const HomePage = () => {
 							<a href="#" className="hover:text-blue-600 hover:underline">Privacy & Terms</a>
 							<a href="#" className="hover:text-blue-600 hover:underline">Ad Choices</a>
 						</div>
-						<p className="text-xs text-gray-500 mt-2">LinkedIn Clone © 2024</p>
+						<p className="text-xs text-gray-500 mt-2">LinkedIn Clone © 2025</p>
 					</div>
 				</div>
 			)}

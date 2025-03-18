@@ -64,7 +64,7 @@ const LoginForm = () => {
 
 			<button 
 				type="submit" 
-				className="btn btn-primary w-full h-12 rounded-md flex items-center justify-center text-white bg-primary hover:bg-primary-focus"
+				className="w-full h-12 rounded-md flex items-center justify-center text-white bg-primary hover:bg-primary-focus font-medium"
 				disabled={isLoading || !usernameOrEmail.trim() || !password.trim()}
 			>
 				{isLoading ? <Loader className="size-5 animate-spin mr-2" /> : "Login"}

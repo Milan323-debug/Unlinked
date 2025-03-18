@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../lib/axios";
 import Sidebar from "../components/Sidebar";
@@ -19,6 +19,12 @@ const NetworkPage = () => {
 		queryKey: ["connections"],
 		queryFn: () => axiosInstance.get("/connections"),
 	});
+
+	const [showMore, setShowMore] = useState(false);
+
+	const handleShowMore = () => {
+		setShowMore(!showMore);
+	};
 
 	return (
 		<div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
@@ -50,14 +56,22 @@ const NetworkPage = () => {
 							</p>
 						</div>
 					)}
-					{connections?.data?.length > 0 && (
+					{Array.isArray(connections?.data) && connections.data.length > 0 && (
 						<div className='mb-8'>
 							<h2 className='text-xl font-semibold mb-4'>My Connections</h2>
 							<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-								{connections.data.map((connection) => (
+								{connections.data.slice(0, showMore ? connections.data.length : 5).map((connection) => (
 									<UserCard key={connection._id} user={connection} isConnection={true} />
 								))}
 							</div>
+							{connections.data.length > 5 && (
+								<button 
+									className='text-blue-600 font-medium mt-4 hover:text-blue-800 transition-colors duration-200 text-sm w-full text-center'
+									onClick={handleShowMore}
+								>
+									{showMore ? "Show less" : "Show more"}
+								</button>
+							)}
 						</div>
 					)}
 				</div>
