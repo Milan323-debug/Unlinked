@@ -37,42 +37,37 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
-			<div className="space-y-1">
+		<form onSubmit={handleSubmit} className="space-y-4 w-full">
+			<div>
 				<input
+					id="usernameOrEmail"
 					type="text"
-					placeholder="Username or Email"
+					placeholder="Username"
 					value={usernameOrEmail}
 					onChange={(e) => setUsernameOrEmail(e.target.value)}
-					className="input input-bordered w-full"
+					className="input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
 					required
 				/>
-				<p className="text-xs text-gray-500">
-					Enter your username or email address
-				</p>
 			</div>
 			
-			<div className="space-y-1">
+			<div>
 				<input
+					id="password"
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
-					className="input input-bordered w-full"
+					className="input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
 					required
-					minLength={6}
 				/>
-				<p className="text-xs text-gray-500">
-					Password must be at least 6 characters
-				</p>
 			</div>
 
 			<button 
 				type="submit" 
-				className="btn btn-primary w-full"
+				className="btn btn-primary w-full h-12 rounded-md flex items-center justify-center text-white bg-primary hover:bg-primary-focus"
 				disabled={isLoading || !usernameOrEmail.trim() || !password.trim()}
 			>
-				{isLoading ? <Loader className="size-5 animate-spin" /> : "Login"}
+				{isLoading ? <Loader className="size-5 animate-spin mr-2" /> : "Login"}
 			</button>
 		</form>
 	);

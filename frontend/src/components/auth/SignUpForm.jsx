@@ -9,7 +9,6 @@ const SignUpForm = ({ signUp }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const queryClient = useQueryClient();
 
   const { mutate: signUpMutation, isLoading } = useMutation({
@@ -32,41 +31,62 @@ const SignUpForm = ({ signUp }) => {
   };
 
   return (
-    <form onSubmit={handleSignUp} className='flex flex-col gap-4'>
-      <input
-        type='text'
-        placeholder='Full name'
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className='input input-bordered w-full'
-        required
-      />
-      <input
-        type='text'
-        placeholder='Username'
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className='input input-bordered w-full'
-        required
-      />
-      <input
-        type='email'
-        placeholder='Email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className='input input-bordered w-full'
-        required
-      />
-      <input
-        type='password'
-        placeholder='Password (6+ characters)'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className='input input-bordered w-full'
-        required
-      />
-      <button type="submit" disabled={isLoading} className='btn btn-primary w-full text-white'>
-        {isLoading ? <Loader className='size-5 animate-spin' /> : 'Agree & Join'}
+    <form onSubmit={handleSignUp} className='space-y-4 w-full'>
+      <div>
+        <input
+          id="fullName"
+          type='text'
+          placeholder='Full name'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className='input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary'
+          required
+        />
+      </div>
+      
+      <div>
+        <input
+          id="username"
+          type='text'
+          placeholder='Username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className='input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary'
+          required
+        />
+      </div>
+      
+      <div>
+        <input
+          id="email"
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className='input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary'
+          required
+        />
+      </div>
+      
+      <div>
+        <input
+          id="signupPassword"
+          type='password'
+          placeholder='Password (6+ characters)'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className='input input-bordered w-full h-12 rounded-md focus:outline-none focus:ring-1 focus:ring-primary'
+          required
+          minLength={6}
+        />
+      </div>
+      
+      <button 
+        type="submit" 
+        disabled={isLoading} 
+        className='btn btn-primary w-full h-12 rounded-md text-white flex items-center justify-center bg-primary hover:bg-primary-focus'
+      >
+        {isLoading ? <Loader className='size-5 animate-spin mr-2' /> : 'Agree & Join'}
       </button>
     </form>
   );

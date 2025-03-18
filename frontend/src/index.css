@@ -1,33 +1,22 @@
 @import "tailwindcss";
-
-/* LinkedIn-like custom styling */
-:root {
-  /* Primary brand color (LinkedIn Blue) */
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "linkedin";
+  default: true;
   --color-primary: #0A66C2;
-  --color-primary-content: #ffffff; /* Text on primary */
-
-  /* Secondary color (white) */
+  --color-primary-content: #dfc3c3;
   --color-secondary: #ffffff;
-  --color-secondary-content: #0A66C2; /* Text on secondary */
-
-  /* Accent color (LinkedIn Green) */
+  --color-secondary-content: #0A66C2;
   --color-accent: #7FC15E;
-  --color-accent-content: #ffffff; /* Text on accent */
-
-  /* Neutral color (commonly used for "cards") */
+  --color-accent-content: #ffffff;
   --color-neutral: #000000;
-  --color-neutral-content: #ffffff; /* Text on neutral */
-
-  /* Base backgrounds & text */
-  --color-base-100: #F3F2EF; /* Main background */
-  --color-base-content: #000000; /* Text on base-100 */
-
-  /* A slightly lighter background for inputs/cards */
-  --color-base-200: #ffffff; 
-
-  /* Misc. statuses */
-  --color-info: #5E5E5E; 
+  --color-neutral-content: #ffffff;
+  --color-base-100: #F3F2EF;
+  --color-base-content: #000000;
+  --color-base-200: #ffffff;
+  --color-info: #5E5E5E;
   --color-success: #057642;
   --color-warning: #F5C75D;
   --color-error: #CC1016;
 }
+
