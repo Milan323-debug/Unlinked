@@ -19,8 +19,8 @@ function App() {
     // Display a message to confirm the app is loading
     console.log("App component mounted");
     
-    // Test API connection
-    fetch("http://localhost:3000/api/v1/auth/me")
+    // Test API connection using axiosInstance instead of hardcoded fetch
+    axiosInstance.get('/auth/me')
       .then(res => {
         console.log("API connection status:", res.status);
       })
