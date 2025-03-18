@@ -1,12 +1,9 @@
 import axios from 'axios';
-
-const BASE_URL = 'http://localhost:5000/api/v1';
+import { axiosInstance } from './axios.js';
 
 export const fetchAuthUser = async () => {
     try {
-        const { data } = await axios.get(`${BASE_URL}/auth/me`, {
-            withCredentials: true
-        });
+        const { data } = await axiosInstance.get('/auth/me');
         return data;
     } catch (error) {
         throw error;
